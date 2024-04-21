@@ -1,17 +1,19 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+import ChooseUser from "./pages/home/ChooseUser";
+import Home from "./pages/home/Home";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <div>
-        <h1>Hello World!</h1>
-      </div>
-    </>
+    <div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/choose" element={<ChooseUser />} />
+          <Route path="/chooseguest" element={<ChooseUser />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 
