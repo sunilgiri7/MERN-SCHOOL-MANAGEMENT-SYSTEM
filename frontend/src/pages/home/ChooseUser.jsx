@@ -1,15 +1,34 @@
-import React, { useState } from "react";
-import { Grid, Paper, Typography, Box, Backdrop } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import {
+  Grid,
+  Paper,
+  Typography,
+  Box,
+  Backdrop,
+  Container,
+  CircularProgress,
+} from "@mui/material";
 import { AccountCircle, School, Group } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../redux/userRelated/UserHandle";
+import PopUp from "../../model/PopUp";
+import { current } from "@reduxjs/toolkit";
 
 const ChooseUser = ({ visitor }) => {
   const [loader, setLoader] = useState(false);
-  const password = "zxc";
+  const password = "password123";
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const ContainerStyled = styled("div")({
+  const { status, currentUser, currentRole } = useSelector(
+    (state) => state.user
+  );
+  const [showPopup, setShowpopup] = useState(true);
+  const [message, setMessage] = useState("");
+
+  const Container = styled("div")({
     background: "teal",
     height: "100vh",
     display: "flex",
@@ -20,13 +39,11 @@ const ChooseUser = ({ visitor }) => {
   const navigateHandler = (user) => {
     if (user === "Admin") {
       if (visitor === "guest") {
-        const email = "sunilgiri@1";
+        const email = "sunil@gmail.com";
         const fields = { email, password };
         setLoader(true);
-        // Simulate async operation
-        setTimeout(() => {
-          setLoader(false);
-        }, 2000); // Replace 2000 with your desired loading time
+        dispatch(loginUser(fields, user));
+        console.log("dispatched");
       } else {
         navigate("/AdminLogin");
       }
@@ -36,31 +53,41 @@ const ChooseUser = ({ visitor }) => {
         const studentName = "Aaryasha Giri";
         const fields = { rollNo, studentName, password };
         setLoader(true);
-        // Simulate async operation
-        setTimeout(() => {
-          setLoader(false);
-        }, 2000); // Replace 2000 with your desired loading time
+        dispatch(loginUser(fields, user));
       } else {
         navigate("/StudentLogin");
       }
     } else if (user === "Teacher") {
       if (visitor === "guest") {
-        const email = "elon@1";
+        const email = "elon@gmail.com";
         const fields = { email, password };
         setLoader(true);
-        // Simulate async operation
-        setTimeout(() => {
-          setLoader(false);
-        }, 2000); // Replace 2000 with your desired loading time
+        dispatch(loginUser(fields, user));
       } else {
         navigate("/TeacherLogin");
       }
     }
   };
 
+  useEffect(() => {
+    if (status === "success" || currentUser != null) {
+      if (currentRole === "Admin") {
+        navigate("/Admin/dashboard");
+      } else if (currentRole === "Student") {
+        navigate("/Student/dashboard");
+      } else if (currentRole === "Teacher") {
+        navigate("/Teacher/dashboard");
+      }
+    } else if (status === "error") {
+      setLoader(false);
+      setMessage("Network Error");
+      setShowpopup(true);
+    }
+  }, [status, currentRole, navigate, currentUser]);
+
   return (
     <>
-      <ContainerStyled>
+      <Container>
         <Grid container spacing={2} justifyContent="center">
           <Grid item xs={12} sm={6} md={4}>
             <div onClick={() => navigateHandler("Admin")}>
@@ -181,10 +208,17 @@ const ChooseUser = ({ visitor }) => {
             </div>
           </Grid>
         </Grid>
-      </ContainerStyled>
+      </Container>
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={loader}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+      <PopUp
+        message={message}
+        setShowpopup={setShowpopup}
+        showPopup={showPopup}
       />
     </>
   );
