@@ -3,11 +3,15 @@ const Student = require("../../models/studentSchema");
 const Subject = require("../../models/subjectSchema");
 
 const studentLogin = async (req, res) => {
+  console.log("defjwbkfe");
   try {
+    console.log(req.body.rollNum);
+    console.log(req.body.name);
     const student = await Student.findOne({
       rollNum: req.body.rollNum,
       name: req.body.name,
     });
+    // console.log(student);
     if (student) {
       const validated = await bcrypt.compare(
         req.body.password,

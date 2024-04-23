@@ -19,7 +19,7 @@ const {
 } = require("../../controllers/student/studentAttendance");
 
 router.post("/studentReg", studentReg);
-router.post("/studentLogin", studentLogin);
+router.post("/StudentLogin", studentLogin);
 router.get("/getStudent/:id", getStudents);
 router.get("/getStudentDetails/:id", getStudentDetail);
 router.get("/deleteStudent/:id", deleteStudent);

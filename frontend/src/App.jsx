@@ -12,6 +12,7 @@ import TeacherDashboard from "./pages/teacher/TeacherDashboard";
 
 function App() {
   const { currentRole } = useSelector((state) => state.user);
+  console.log(currentRole);
   return (
     <div>
       <Router>
@@ -31,7 +32,7 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         )}
-        {currentRole === "Admin" && (
+        {currentRole === "admin" && (
           <>
             <AdminDashboard />
           </>

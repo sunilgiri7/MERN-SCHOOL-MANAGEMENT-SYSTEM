@@ -20,26 +20,47 @@ app.get("/", (req, res) => {
   res.send("Server is ready!");
 });
 
+// const adminRoutes = require("./routes/adminRouter/admin.js");
+// app.use("/admin-routes", adminRoutes);
+
+// const teacherRoutes = require("./routes/teacherRouter/teacherReg.js");
+// app.use("/teacher-routes", teacherRoutes);
+
+// const studentRoutes = require("./routes/studentRouter/student.js");
+// app.use("/student-routes", studentRoutes);
+
+// const subjectRoutes = require("./routes/subjectRouter/subject.js");
+// app.use("/subject-routes", subjectRoutes);
+
+// const complainRoutes = require("./routes/complainRouter/complain.js");
+// app.use("/complain-routes", complainRoutes);
+
+// const noticeRoutes = require("./routes/noticeRouter/Notice.js");
+// app.use("/notice-routes", noticeRoutes);
+
+// const classRoutes = require("./routes/classRouter/sclass.js");
+// app.use("/class-routes", classRoutes);
+
 const adminRoutes = require("./routes/adminRouter/admin.js");
-app.use("/admin-routes", adminRoutes);
+app.use("/", adminRoutes);
 
 const teacherRoutes = require("./routes/teacherRouter/teacherReg.js");
-app.use("/teacher-routes", teacherRoutes);
+app.use("/", teacherRoutes);
 
 const studentRoutes = require("./routes/studentRouter/student.js");
-app.use("/student-routes", studentRoutes);
+app.use("/", studentRoutes);
 
 const subjectRoutes = require("./routes/subjectRouter/subject.js");
-app.use("/subject-routes", subjectRoutes);
+app.use("/", subjectRoutes);
 
 const complainRoutes = require("./routes/complainRouter/complain.js");
-app.use("/complain-routes", complainRoutes);
+app.use("/", complainRoutes);
 
 const noticeRoutes = require("./routes/noticeRouter/Notice.js");
-app.use("/notice-routes", noticeRoutes);
+app.use("/", noticeRoutes);
 
 const classRoutes = require("./routes/classRouter/sclass.js");
-app.use("/class-routes", classRoutes);
+app.use("/", classRoutes);
 
 app.listen(port, () => {
   console.log("Listening on port " + port);

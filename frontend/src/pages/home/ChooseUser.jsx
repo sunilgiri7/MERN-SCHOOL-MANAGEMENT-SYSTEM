@@ -39,7 +39,7 @@ const ChooseUser = ({ visitor }) => {
   const navigateHandler = (user) => {
     if (user === "Admin") {
       if (visitor === "guest") {
-        const email = "sunil@gmail.com";
+        const email = "sunilgiri@gmail.com";
         const fields = { email, password };
         setLoader(true);
         dispatch(loginUser(fields, user));
@@ -49,9 +49,9 @@ const ChooseUser = ({ visitor }) => {
       }
     } else if (user === "Student") {
       if (visitor === "guest") {
-        const rollNo = "1";
-        const studentName = "Aaryasha Giri";
-        const fields = { rollNo, studentName, password };
+        const rollNum = "1";
+        const name = "Aaryasha Giri";
+        const fields = { rollNum, name, password };
         setLoader(true);
         dispatch(loginUser(fields, user));
       } else {
