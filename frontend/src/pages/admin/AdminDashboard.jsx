@@ -1,19 +1,22 @@
+import React, { useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import {
   Box,
   CssBaseline,
   Toolbar,
-  AppBar,
+  // AppBar,
   IconButton,
   Typography,
-  Drawer,
+  // Drawer,
   Divider,
   List,
+  ThemeProvider,
 } from "@mui/material";
-import React, { useState } from "react";
-import { Route, Routes } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import { AppBar, Drawer } from "../../components/styles";
 import Logout from "../auth/Logout";
+import Sidebar from "./AdminSidebar";
 // import SideBar from "../components/SideBar"; // Import your SideBar component
 // import AccountMenu from "../components/AccountMenu"; // Import your AccountMenu component
 
@@ -28,7 +31,11 @@ const AdminDashboard = () => {
     <>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <AppBar position="fixed" open={open}>
+        <AppBar
+          position="absolute"
+          open={open}
+          sx={{ backgroundColor: "#7f56da" }}
+        >
           <Toolbar sx={{ pr: "24px" }}>
             <IconButton
               edge="start"
@@ -62,16 +69,18 @@ const AdminDashboard = () => {
             </IconButton>
           </Toolbar>
           <Divider />
-          <List component="nav">{/* <SideBar /> */}</List>
+          <List component="nav">
+            <Sidebar />
+          </List>
         </Drawer>
         <Box component="main" sx={styles.boxStyled}>
           <Toolbar />
           <Routes>
             <Route path="/logout" element={<Logout />} />
+            {/* Add more routes for other pages */}
           </Routes>
         </Box>
       </Box>
-      <Logout />
     </>
   );
 };
@@ -87,16 +96,20 @@ const styles = {
     flexGrow: 1,
     height: "100vh",
     overflow: "auto",
-    marginLeft: "240px", // Add this line to create space for the drawer
-  },
-  drawerStyled: {
-    width: 240, // Set the width of the drawer
-    flexShrink: 0,
-  },
-  hideDrawer: {
-    display: "none", // Hide the drawer when closed
   },
   toolBarStyled: {
-    px: 2, // Add some padding to the toolbar
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    px: [1],
+  },
+  drawerStyled: {
+    display: "flex",
+  },
+  hideDrawer: {
+    display: "flex",
+    "@media (max-width: 600px)": {
+      display: "none",
+    },
   },
 };

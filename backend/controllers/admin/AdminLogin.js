@@ -2,7 +2,6 @@ const Admin = require("../../models/adminSchema");
 const bcrypt = require("bcrypt");
 
 const adminLogin = async (req, res) => {
-  console.log("start");
   const { email, password } = req.body;
   if (email && password) {
     let admin = await Admin.findOne({ email: email });

@@ -86,9 +86,9 @@ const Home = () => {
               align="center"
               style={{ fontFamily: "Arial", fontSize: "0.9rem", color: "#888" }}
             >
-              Already have an account?{" "}
+              Don't have an account?{" "}
               <a
-                href="/login"
+                href="/Adminregister"
                 style={{ color: "blue", textDecoration: "underline" }}
               >
                 Signup here

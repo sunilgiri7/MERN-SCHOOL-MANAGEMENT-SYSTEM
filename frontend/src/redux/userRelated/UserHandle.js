@@ -16,6 +16,8 @@ import {
 export const loginUser = (fields, role) => async (dispatch) => {
   dispatch(authRequest());
   try {
+    console.log(role);
+    console.log(fields);
     const result = await axios.post(
       `http://localhost:3000/${role}Login`,
       fields,
@@ -37,9 +39,13 @@ export const loginUser = (fields, role) => async (dispatch) => {
 export const registerUser = (fields, role) => async (dispatch) => {
   dispatch(authRequest());
   try {
-    const result = await axios.post(`/${role}Reg`, fields, {
-      headers: { "Content-Type": "application/json" },
-    });
+    const result = await axios.post(
+      `http://localhost:3000/${role}Reg`,
+      fields,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     if (result.data.schoolName) {
       dispatch(authSuccess(result.data));
     } else if (result.data.school) {

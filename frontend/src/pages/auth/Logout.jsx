@@ -1,85 +1,114 @@
-import React, { useState } from "react";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import { makeStyles } from "@material-ui/core/styles";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authLogout } from "../../redux/userRelated/UserSlice";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& .MuiDialog-paper": {
-      borderRadius: theme.spacing(2),
-    },
-  },
-  title: {
-    fontWeight: "bold",
-  },
-  content: {
-    padding: theme.spacing(2),
-  },
-  actions: {
-    padding: theme.spacing(1),
-  },
-}));
+import styled from "styled-components";
 
 const Logout = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const classes = useStyles();
-  const [open, setOpen] = useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const handleLogout = () => {
     dispatch(authLogout());
     navigate("/");
-    console.log("Logging out...");
-    handleClose();
+  };
+
+  const handleCancel = () => {
+    navigate(-1);
   };
 
   return (
-    <div>
-      <Button variant="contained" color="primary" onClick={handleOpen}>
-        Logout {currentUser.name}
-      </Button>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="logout-dialog-title"
-        aria-describedby="logout-dialog-description"
-        className={classes.root}
-      >
-        <DialogTitle id="logout-dialog-title" className={classes.title}>
-          Logout Confirmation
-        </DialogTitle>
-        <DialogContent className={classes.content}>
-          <DialogContentText id="logout-dialog-description">
-            Are you sure you want to log out?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions className={classes.actions}>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleLogout} color="primary" autoFocus>
-            Logout
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+    <LogoutContainer>
+      <LogoutHeader>
+        <h1>{currentUser.name}</h1>
+        <p>Are you sure you want to log out?</p>
+      </LogoutHeader>
+      <LogoutButtonContainer>
+        <LogoutButton primary onClick={handleLogout}>
+          Log Out
+        </LogoutButton>
+        <LogoutButton secondary onClick={handleCancel}>
+          Cancel
+        </LogoutButton>
+      </LogoutButtonContainer>
+    </LogoutContainer>
   );
 };
 
 export default Logout;
+
+const LogoutContainer = styled.div`
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  color: #333333;
+  max-width: 400px;
+  margin: 0 auto;
+`;
+
+const LogoutHeader = styled.div`
+  margin-bottom: 20px;
+  text-align: center;
+
+  h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 16px;
+    color: #666666;
+  }
+`;
+
+const LogoutButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+`;
+
+const LogoutButton = styled.button`
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  ${(props) =>
+    props.primary &&
+    `
+    background-color: #ea0606;
+    color: #ffffff;
+    border: none;
+
+    &:hover {
+      background-color: #c20505;
+    }
+  `}
+
+  ${(props) =>
+    props.secondary &&
+    `
+    background-color: #f0f0f0;
+    color: #333333;
+    border: 1px solid #ccc;
+
+    &:hover {
+      background-color: #e0e0e0;
+    }
+  `}
+`;

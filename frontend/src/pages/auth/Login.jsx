@@ -1,5 +1,5 @@
 import { ThemeProvider } from "@emotion/react";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { LinkRounded, Visibility, VisibilityOff } from "@mui/icons-material";
 import {
   Backdrop,
   Box,
@@ -15,6 +15,7 @@ import {
   Paper,
   TextField,
   Typography,
+  colors,
   createTheme,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -82,9 +83,9 @@ const Login = ({ role }) => {
     if (name === "studentName") setStudentNameError(false);
   };
   const guestModeHandler = () => {
-    const password = "password123";
+    const password = "sunil1";
     if (role === "Admin") {
-      const email = "sunil@gmail.com";
+      const email = "thisissunil7@gmail.com";
       const fields = { email, password };
       setGuestLoader(true);
       dispatch(loginUser(fields, role));
@@ -237,7 +238,7 @@ const Login = ({ role }) => {
                   type="submit"
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 3 }}
+                  sx={{ mt: 3, backgroundColor: "#7f56da", color: "#fff" }}
                 >
                   {loader ? (
                     <CircularProgress size={24} color="inherit" />
@@ -309,16 +310,28 @@ const Login = ({ role }) => {
                 and communicate effortlessly.
               </Typography>
             </Slide>
-            <Button
-              variant="contained"
-              sx={{
-                alignSelf: "center",
-                backgroundColor: "#7f56da",
-                color: "#fff",
-              }}
-            >
-              Register
-            </Button>
+            {role === "Admin" && (
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{
+                  alignSelf: "center",
+                  backgroundColor: "#7f56da",
+                  color: "#fff",
+                  textDecoration: "none",
+                  "&:hover": {
+                    textDecoration: "none",
+                  },
+                }}
+              >
+                <Link
+                  to="/Adminregister"
+                  style={{ color: "#fff", textDecoration: "none" }}
+                >
+                  Register
+                </Link>
+              </Button>
+            )}
           </Grid>
         </Grid>
         <Backdrop
