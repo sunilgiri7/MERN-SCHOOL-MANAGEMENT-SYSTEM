@@ -17,6 +17,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { AppBar, Drawer } from "../../components/styles";
 import Logout from "../auth/Logout";
 import Sidebar from "./AdminSidebar";
+import AdminProfile from "./AdminProfile";
 // import SideBar from "../components/SideBar"; // Import your SideBar component
 // import AccountMenu from "../components/AccountMenu"; // Import your AccountMenu component
 
@@ -76,6 +77,7 @@ const AdminDashboard = () => {
         <Box component="main" sx={styles.boxStyled}>
           <Toolbar />
           <Routes>
+            <Route path="Admin/profile" element={<AdminProfile />} />
             <Route path="/logout" element={<Logout />} />
             {/* Add more routes for other pages */}
           </Routes>

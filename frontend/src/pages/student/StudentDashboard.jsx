@@ -17,6 +17,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { AppBar, Drawer } from "../../components/styles";
 import Logout from "../auth/Logout";
 import Sidebar from "./StudentSidebar";
+import StudentProfile from "./StudentProfile";
 
 const StudentDashboard = () => {
   const [open, setOpen] = useState(false);
@@ -74,6 +75,7 @@ const StudentDashboard = () => {
         <Box component="main" sx={styles.boxStyled}>
           <Toolbar />
           <Routes>
+            <Route path="Student/profile" element={<StudentProfile />} />
             <Route path="/logout" element={<Logout />} />
             {/* Add more routes for other pages */}
           </Routes>

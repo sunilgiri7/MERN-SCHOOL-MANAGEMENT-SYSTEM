@@ -10,7 +10,7 @@ import {
 export const getAllStudents = (id) => async (dispatch) => {
   dispatch(getRequest());
   try {
-    const result = await axios.get(`/Students/${id}`);
+    const result = await axios.get(`http://localhost:3000/Student/${id}`);
     if (result.data.message) {
       dispatch(getFailed(result.data.message));
     } else {

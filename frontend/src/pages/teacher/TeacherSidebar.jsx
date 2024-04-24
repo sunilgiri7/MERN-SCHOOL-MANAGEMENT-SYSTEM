@@ -17,9 +17,7 @@ import { useSelector } from "react-redux";
 
 const TeacherSideBar = () => {
   const { currentUser } = useSelector((state) => state.user);
-  console.log("start");
-  console.log(currentUser);
-  // const className = currentUser.teachingClass;
+  const className = currentUser.teachingClass;
 
   const location = useLocation();
   return (
@@ -47,7 +45,7 @@ const TeacherSideBar = () => {
               }
             />
           </ListItemIcon>
-          {/* <ListItemText primary={`Class ${className.className}`} /> */}
+          <ListItemText primary={`Class ${className.className}`} />
         </ListItemButton>
         <ListItemButton component={Link} to="/Teacher/complain">
           <ListItemIcon>
