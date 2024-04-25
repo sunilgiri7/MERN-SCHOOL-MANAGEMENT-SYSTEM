@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import {
   Card,
@@ -10,19 +10,19 @@ import {
   Container,
   Paper,
 } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserDetails } from "../../redux/userRelated/UserHandle";
 
 const StudentProfile = () => {
+  const dispatch = useDispatch();
   const { currentUser, response, error } = useSelector((state) => state.user);
-
-  if (response) {
-    console.log(response);
-  } else if (error) {
-    console.log(error);
-  }
 
   const className = currentUser.className;
   const studentSchool = currentUser.school;
+
+  useEffect(() => {
+    dispatch(getUserDetails(currentUser._id, "getStudentDetails"));
+  }, [dispatch, currentUser._id]);
 
   return (
     <Container maxWidth="md">
@@ -43,7 +43,7 @@ const StudentProfile = () => {
             <strong>Class:</strong> {className.className}
           </Typography>
           <Typography variant="subtitle1" component="p">
-            <strong>School:</strong> {studentSchool.schoolName}
+            <strong>School:</strong> {studentSchool.school}
           </Typography>
         </ProfileDetails>
       </StyledPaper>

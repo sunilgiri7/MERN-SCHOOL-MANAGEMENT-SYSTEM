@@ -13,7 +13,6 @@ import Logout from "./pages/auth/Logout";
 
 function App() {
   const { currentRole } = useSelector((state) => state.user);
-  console.log(currentRole);
   return (
     <div>
       <Router>
@@ -22,7 +21,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/choose" element={<ChooseUser visitor={"normal"} />} />
             <Route
-              path="/chooseguest"
+              path="/chooseasguest"
               element={<ChooseUser visitor={"guest"} />}
             />
             <Route path="/AdminLogin" element={<Login role="Admin" />} />

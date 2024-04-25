@@ -58,7 +58,7 @@ const Home = () => {
                   fontSize: "1rem",
                 }}
                 component={Link}
-                to="/chooseguest"
+                to="/chooseasguest"
               >
                 Login as guest
               </Button>

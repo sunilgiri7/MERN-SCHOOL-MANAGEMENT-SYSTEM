@@ -18,6 +18,7 @@ import { AppBar, Drawer } from "../../components/styles";
 import Logout from "../auth/Logout";
 import Sidebar from "./StudentSidebar";
 import StudentProfile from "./StudentProfile";
+import StudentHomepage from "./StudentHomepage";
 
 const StudentDashboard = () => {
   const [open, setOpen] = useState(false);
@@ -52,7 +53,7 @@ const StudentDashboard = () => {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Admin Dashboard
+              Student Dashboard
             </Typography>
             {/* <AccountMenu /> */}
           </Toolbar>
@@ -75,8 +76,11 @@ const StudentDashboard = () => {
         <Box component="main" sx={styles.boxStyled}>
           <Toolbar />
           <Routes>
+            <Route path="/" element={<StudentHomepage />} />
             <Route path="Student/profile" element={<StudentProfile />} />
+            <Route path="/Student/profile" element={<StudentProfile />} />
             <Route path="/logout" element={<Logout />} />
+
             {/* Add more routes for other pages */}
           </Routes>
         </Box>
