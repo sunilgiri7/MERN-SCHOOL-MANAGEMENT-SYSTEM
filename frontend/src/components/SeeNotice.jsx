@@ -2,19 +2,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllNotices } from "../redux/noticeRelated/NoticeHandle";
 import TableViewTemplate from "./TableViewTemplate";
 import { useEffect } from "react";
+import { Paper } from "@mui/material";
 
 const SeeNotice = () => {
   const dispatch = useDispatch();
   const { currentUser, currentRole } = useSelector((state) => state.user);
-  const { noticeList, loading, error, response } = useSelector(
+  const { noticesList, loading, error, response } = useSelector(
     (state) => state.notice
   );
-  //   console.log(noticeList);
+
   useEffect(() => {
     if (currentRole === "Admin") {
-      dispatch(getAllNotices(currentUser._id, "Notice"));
+      dispatch(getAllNotices(currentUser._id, "notice"));
     } else {
-      dispatch(getAllNotices(currentUser.school._id, "Notice"));
+      dispatch(getAllNotices(currentUser.school, "notice"));
     }
   }, [dispatch]);
   if (error) {
@@ -26,7 +27,7 @@ const SeeNotice = () => {
     { id: "date", label: "Date", minWidth: 170 },
   ];
 
-  const noticeRows = noticeList.map((notice) => {
+  const noticeRows = noticesList.map((notice) => {
     const date = new Date(notice.data);
     const dateString =
       date.toString() !== "Invalid Date"
@@ -50,7 +51,7 @@ const SeeNotice = () => {
         <>
           <h3 style={{ fontSize: "30px", marginBottom: "40px" }}>Notices</h3>
           <Paper sx={{ width: "100%", overflow: "hidden" }}>
-            {Array.isArray(noticeList) && noticeList.length > 0 && (
+            {Array.isArray(noticesList) && noticesList.length > 0 && (
               <TableViewTemplate columns={noticeColumns} rows={noticeRows} />
             )}
           </Paper>

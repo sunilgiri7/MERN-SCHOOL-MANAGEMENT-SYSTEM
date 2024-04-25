@@ -20,6 +20,7 @@ const studentAttendance = async (req, res) => {
       const attendanceSessions = student.attendance.filter(
         (a) => a.subName.toString() === subName
       ).length;
+
       if (attendanceSessions >= sub.sessions) {
         return res.send({ message: "Maximum attendance limit reached" });
       }

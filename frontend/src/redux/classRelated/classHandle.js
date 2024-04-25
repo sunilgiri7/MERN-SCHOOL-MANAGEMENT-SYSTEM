@@ -73,9 +73,7 @@ export const getSubjectList = (id, address) => async (dispatch) => {
 export const getTeacherFreeClassSubjects = (id) => async (dispatch) => {
   dispatch(getRequest());
   try {
-    const result = await axios.get(
-      `http://localhost:3000/FreeSubjectList/${id}`
-    );
+    const result = await axios.get(`http://localhost:3000/classSubject/${id}`);
     if (result.data.message) {
       dispatch(getFailed(result.data.message));
     } else {
