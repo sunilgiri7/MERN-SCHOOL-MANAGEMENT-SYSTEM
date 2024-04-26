@@ -7,10 +7,11 @@ import {
   stuffDone,
 } from "./studentSlice";
 
-export const getAllStudents = (id) => async (dispatch) => {
+export const getAllStudent = (address, id) => async (dispatch) => {
   dispatch(getRequest());
   try {
-    const result = await axios.get(`http://localhost:3000/Student/${id}`);
+    const result = await axios.get(`http://localhost:3000/${address}/${id}`);
+    // console.log(result);
     if (result.data.message) {
       dispatch(getFailed(result.data.message));
     } else {
@@ -20,6 +21,7 @@ export const getAllStudents = (id) => async (dispatch) => {
     dispatch(getError(error));
   }
 };
+
 export const updateStudentField = (id, fields, address) => async (dispatch) => {
   dispatch(getRequest());
   try {

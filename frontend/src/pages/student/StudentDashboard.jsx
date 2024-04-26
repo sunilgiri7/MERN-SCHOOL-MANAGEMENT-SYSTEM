@@ -19,6 +19,7 @@ import Logout from "../auth/Logout";
 import Sidebar from "./StudentSidebar";
 import StudentProfile from "./StudentProfile";
 import StudentHomepage from "./StudentHomepage";
+import StudentSubject from "./StudentSubject";
 
 const StudentDashboard = () => {
   const [open, setOpen] = useState(false);
@@ -79,6 +80,8 @@ const StudentDashboard = () => {
             <Route path="/" element={<StudentHomepage />} />
             <Route path="Student/profile" element={<StudentProfile />} />
             <Route path="/Student/profile" element={<StudentProfile />} />
+
+            <Route path="/Student/subjects" element={<StudentSubject />} />
             <Route path="/logout" element={<Logout />} />
 
             {/* Add more routes for other pages */}
