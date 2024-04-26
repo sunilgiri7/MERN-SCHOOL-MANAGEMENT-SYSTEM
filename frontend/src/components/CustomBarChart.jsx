@@ -81,7 +81,7 @@ const generateDistinctColors = (count) => {
   for (let i = 0; i < count; i++) {
     const hue = (i * goldenRatioConjugate) % 1;
     const color = hslToRgb(hue, 0.6, 0.6);
-    color.push(`rgb(${color[0]}, ${color[1]}, ${color[2]})`);
+    colors.push(`rgb(${color[0]}, ${color[1]}, ${color[2]})`);
   }
   return colors;
 };

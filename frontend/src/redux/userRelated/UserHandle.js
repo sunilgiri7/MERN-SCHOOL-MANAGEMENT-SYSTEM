@@ -62,6 +62,8 @@ export const logoutUser = () => (dispatch) => {
 export const getUserDetails = (id, address) => async (dispatch) => {
   dispatch(getRequest());
   try {
+    console.log(id);
+    console.log(address);
     const result = await axios.get(`http://localhost:3000/${address}/${id}`);
     if (result.data) {
       dispatch(doneSuccess(result.data));

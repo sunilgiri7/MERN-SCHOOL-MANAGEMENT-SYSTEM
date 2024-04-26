@@ -21,7 +21,7 @@ const classSlice = createSlice({
       state.loading = true;
     },
     getSubDetailsRequest: (state) => {
-      state.loading = true;
+      state.subloading = true;
     },
     getSuccess: (state, action) => {
       state.classesList = action.payload;
@@ -65,7 +65,7 @@ const classSlice = createSlice({
     },
     getSubDetailsSuccess: (state, action) => {
       state.subjectDetails = action.payload;
-      state.subloading = false;
+      state.subloading = false; // Update subloading appropriately
       state.error = null;
     },
     resetSubjects: (state, action) => {
@@ -74,6 +74,7 @@ const classSlice = createSlice({
     },
   },
 });
+
 export const {
   getRequest,
   getSubDetailsRequest,
@@ -87,4 +88,5 @@ export const {
   getSubDetailsSuccess,
   resetSubjects,
 } = classSlice.actions;
+
 export const classReducer = classSlice.reducer;

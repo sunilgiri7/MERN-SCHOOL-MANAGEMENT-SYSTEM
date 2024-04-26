@@ -36,7 +36,7 @@ const StudentSideBar = () => {
           <ListItemIcon>
             <AssignmentIcon
               color={
-                location.pathname.startsWith("/Student/subjects")
+                location.pathname === "/Student/subjects"
                   ? "primary"
                   : "inherit"
               }

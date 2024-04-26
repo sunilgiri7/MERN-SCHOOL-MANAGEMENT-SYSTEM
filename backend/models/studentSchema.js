@@ -30,7 +30,7 @@ const studentSchema = new mongoose.Schema({
   examResult: [
     {
       subName: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "subject",
       },
       marksObtained: {
