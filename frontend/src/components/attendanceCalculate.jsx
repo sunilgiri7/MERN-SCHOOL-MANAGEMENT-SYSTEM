@@ -55,5 +55,8 @@ export const calculateOverallAttendancePercentage = (subjectAttendance) => {
   if (totalSessionsSumm === 0 || persentCountSum === 0) {
     return 0;
   }
-  return (persentCountSum / totalSessionsSumm) * 100;
+  console.log(persentCountSum);
+  // console.log(totalSessionsSumm);
+  console.log((persentCountSum / 100) * 100);
+  return (persentCountSum / 100) * 100;
 };

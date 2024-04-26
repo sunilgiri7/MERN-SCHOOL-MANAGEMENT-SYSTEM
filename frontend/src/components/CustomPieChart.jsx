@@ -1,7 +1,8 @@
+import React from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
 const COLORS = ["#326e0a", "#930909"];
-const RADIAN = Math.PI / 180; // Corrected from Math.PI / 100
+const RADIAN = Math.PI / 180;
 
 const renderCustomizedLabel = ({
   cx,
@@ -29,6 +30,12 @@ const renderCustomizedLabel = ({
 };
 
 const CustomPieChart = ({ data }) => {
+  // console.log("CustomPieChart rendering with data:", data);
+
+  if (!data || data.length === 0) {
+    return <div>No data available</div>;
+  }
+
   return (
     <ResponsiveContainer width="100%" height={400}>
       <PieChart>

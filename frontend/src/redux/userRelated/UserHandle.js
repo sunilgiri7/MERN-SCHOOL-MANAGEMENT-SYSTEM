@@ -16,8 +16,6 @@ import {
 export const loginUser = (fields, role) => async (dispatch) => {
   dispatch(authRequest());
   try {
-    console.log(role);
-    console.log(fields);
     const result = await axios.post(
       `http://localhost:3000/${role}Login`,
       fields,
@@ -25,7 +23,6 @@ export const loginUser = (fields, role) => async (dispatch) => {
         headers: { "Content-Type": "application/json" },
       }
     );
-    console.log(result);
     if (result.data.role) {
       dispatch(authSuccess(result.data));
     } else {
