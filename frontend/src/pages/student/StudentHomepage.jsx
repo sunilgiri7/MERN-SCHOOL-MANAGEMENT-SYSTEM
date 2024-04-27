@@ -12,6 +12,7 @@ import SeeNotice from "../../components/SeeNotice";
 import CustomPieChart from "../../components/CustomPieChart";
 import styled from "styled-components";
 import CountUp from "react-countup";
+import LoadingSpinner from "../../components/LoadingSpinner"; // Import LoadingSpinner component
 
 const StudentHomepage = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,6 @@ const StudentHomepage = () => {
   const [subjectAttendance, setSubjectAttendance] = useState([]);
   const classID = currentUser.className;
   const schoolId = currentUser.school;
-  // console.log(schoolId);
 
   useEffect(() => {
     dispatch(getUserDetails(currentUser._id, "getStudentDetails"));
@@ -47,9 +47,11 @@ const StudentHomepage = () => {
     { name: "Present", value: overallAttendancePercentage },
     { name: "Absent", value: overallAbsentPercentage },
   ];
+
   return (
     <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
       <Grid container spacing={3}>
+        {/* Total Subjects */}
         <Grid item xs={12} md={3} lg={3}>
           <StyledPaper elevation={3}>
             <Box
@@ -67,6 +69,7 @@ const StudentHomepage = () => {
           </StyledPaper>
         </Grid>
 
+        {/* Total Assignments */}
         <Grid item xs={12} md={3} lg={3}>
           <StyledPaper elevation={3}>
             <Box
@@ -83,6 +86,8 @@ const StudentHomepage = () => {
             <StyledData start={0} end={15} duration={4} />
           </StyledPaper>
         </Grid>
+
+        {/* Total Students */}
         <Grid item xs={12} md={3} lg={3}>
           <StyledPaper elevation={3}>
             <Box
@@ -99,31 +104,29 @@ const StudentHomepage = () => {
             <StyledData start={0} end={numberOfStudents} duration={4} />
           </StyledPaper>
         </Grid>
+
+        {/* Attendance Chart */}
         <Grid item xs={12} md={3} lg={3}>
           <ChartContainer>
-            {response ? (
+            {loading ? (
+              <LoadingSpinner /> // Show loading spinner while data is loading
+            ) : response ? (
               <Typography variant="h6">No Attendance Found</Typography>
             ) : (
               <>
-                {loading ? (
-                  <Typography variant="h6">Loading...</Typography>
+                {subjectAttendance &&
+                Array.isArray(subjectAttendance) &&
+                subjectAttendance.length > 0 ? (
+                  <CustomPieChart data={chartData} />
                 ) : (
-                  <>
-                    {subjectAttendance &&
-                    Array.isArray(subjectAttendance) &&
-                    subjectAttendance.length > 0 ? (
-                      <>
-                        <CustomPieChart data={chartData} />
-                      </>
-                    ) : (
-                      <Typography variant="h6">No Attendance Found</Typography>
-                    )}
-                  </>
+                  <Typography variant="h6">No Attendance Found</Typography>
                 )}
               </>
             )}
           </ChartContainer>
         </Grid>
+
+        {/* See Notice */}
         <Grid item xs={12}>
           <SeeNotice />
         </Grid>
@@ -133,7 +136,6 @@ const StudentHomepage = () => {
 };
 
 const ChartContainer = styled.div`
-  // padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;

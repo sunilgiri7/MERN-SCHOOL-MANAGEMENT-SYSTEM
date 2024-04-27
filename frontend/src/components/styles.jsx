@@ -1,11 +1,12 @@
 import {
   TableCell,
   TableRow,
-  styled,
   tableCellClasses,
   Drawer as MuiDrawer,
   AppBar as MuiAppBar,
 } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import TableContainer from "@mui/material/TableContainer";
 
 const drawerWidth = 240;
 
@@ -47,6 +48,14 @@ export const AppBar = styled(MuiAppBar, {
   }),
 }));
 
+const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
+  marginTop: theme.spacing(2),
+  marginBottom: theme.spacing(2),
+  [theme.breakpoints.down("sm")]: {
+    overflowX: "auto",
+  },
+}));
+
 export const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
@@ -72,3 +81,5 @@ export const Drawer = styled(MuiDrawer, {
     }),
   },
 }));
+
+export default StyledTableContainer;
