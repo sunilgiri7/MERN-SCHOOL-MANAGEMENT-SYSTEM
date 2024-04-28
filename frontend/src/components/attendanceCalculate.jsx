@@ -2,15 +2,19 @@ export const calculateSubjectAttendancePercentage = (
   persentCount,
   totalSessions
 ) => {
+  // console.log(persentCount);
+  // console.log(totalSessions);
   if (persentCount === 0 || totalSessions === 0) {
     return 0;
   }
   const percentage = (persentCount / totalSessions) * 100;
+  // console.log(percentage.toFixed(2));
   return percentage.toFixed(2);
 };
 
 export const groupAttendanceBySubject = (subjectAttendance) => {
   const attendanceBySubject = {};
+  // console.log(subjectAttendance);
   subjectAttendance.forEach((attendance) => {
     const subName = attendance.subName.subName;
     const sessions = attendance.subName.sessions;

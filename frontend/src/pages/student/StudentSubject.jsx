@@ -10,7 +10,11 @@ import Typography from "@material-ui/core/Typography";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
 import TableBody from "@material-ui/core/TableBody";
-import { StyledTableCell, StyledTableRow } from "../../components/styles";
+import {
+  StyledTableCell,
+  StyledTableRow,
+  StyledTableContainer,
+} from "../../components/styles";
 import CustomBarChart from "../../components/CustomBarChart";
 import {
   Container,
@@ -67,48 +71,55 @@ const StudentSubject = () => {
   const renderTableSection = () => {
     return (
       <>
-        <Typography variant="h4" align="center" gutterBottom>
+        <Typography
+          variant="h5"
+          align="center"
+          sx={{ fontWeight: "bold" }}
+          gutterBottom
+        >
           Subject Marks
         </Typography>
-        <Table>
-          <TableHead>
-            <StyledTableRow>
-              <StyledTableCell
-                sx={{
-                  fontFamily:
-                    "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                }}
-              >
-                Subject
-              </StyledTableCell>
-              <StyledTableCell
-                sx={{
-                  fontFamily:
-                    "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                }}
-              >
-                Marks
-              </StyledTableCell>
-            </StyledTableRow>
-          </TableHead>
-          <TableBody>
-            {subjectMarks.map((result, index) => {
-              if (!result.subName || !result.marksObtained) {
-                return null;
-              }
-              return (
-                <StyledTableRow key={index}>
-                  <StyledTableCell>{result.subName.subName}</StyledTableCell>
-                  <StyledTableCell>{result.marksObtained}</StyledTableCell>
-                </StyledTableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
+        <StyledTableContainer>
+          <Table>
+            <TableHead>
+              <StyledTableRow>
+                <StyledTableCell
+                  sx={{
+                    fontFamily:
+                      "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Subject
+                </StyledTableCell>
+                <StyledTableCell
+                  sx={{
+                    fontFamily:
+                      "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Marks
+                </StyledTableCell>
+              </StyledTableRow>
+            </TableHead>
+            <TableBody>
+              {subjectMarks.map((result, index) => {
+                if (!result.subName || !result.marksObtained) {
+                  return null;
+                }
+                return (
+                  <StyledTableRow key={index}>
+                    <StyledTableCell>{result.subName.subName}</StyledTableCell>
+                    <StyledTableCell>{result.marksObtained}</StyledTableCell>
+                  </StyledTableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </StyledTableContainer>
       </>
     );
   };

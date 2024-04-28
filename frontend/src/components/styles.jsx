@@ -48,7 +48,7 @@ export const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
+export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
   marginTop: theme.spacing(2),
   marginBottom: theme.spacing(2),
   [theme.breakpoints.down("sm")]: {
@@ -81,5 +81,3 @@ export const Drawer = styled(MuiDrawer, {
     }),
   },
 }));
-
-export default StyledTableContainer;

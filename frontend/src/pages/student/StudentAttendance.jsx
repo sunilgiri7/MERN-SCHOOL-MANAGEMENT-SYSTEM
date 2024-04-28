@@ -37,9 +37,12 @@ import InsertChartOutlinedIcon from "@mui/icons-material/InsertChartOutlined";
 const StudentAttendance = () => {
   const dispatch = useDispatch();
   const [openState, setOpenState] = useState({});
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
   const { userDetails, currentUser, loading, response, error } = useSelector(
     (state) => state.user
   );
+  //   console.log(currentUser);
+  //   console.log(currentUser._id);
 
   const handleOpen = (subId) => {
     setOpenState((prevState) => ({
@@ -58,30 +61,34 @@ const StudentAttendance = () => {
     console.log(error);
   }
 
-  const [subjectAttendance, setSubjectAttendance] = useState();
+  const [subjectAttendance, setSubjectAttendance] = useState([]);
   const [selectedSection, setSelectedSection] = useState("table");
 
   useEffect(() => {
     if (userDetails) {
       setSubjectAttendance(userDetails.attendance || []);
+      setIsDataLoaded(true);
     }
   }, [userDetails]);
 
-  const attendanceBySubject = groupAttendanceBySubject(subjectAttendance);
+  //   console.log(subjectAttendance);
 
+  const attendanceBySubject = groupAttendanceBySubject(subjectAttendance);
+  // console.log(attendanceBySubject);
   const overallAttendancePercentage =
     calculateOverallAttendancePercentage(subjectAttendance);
   const subjectData = Object.entries(attendanceBySubject).map(
-    ([subName, { subCode, present, sessions }]) => {
+    ([subName, { persent, sessions }]) => {
+      const ses = sessions.length;
       const subjectAttendancePercentage = calculateSubjectAttendancePercentage(
-        present,
-        sessions
+        persent,
+        ses
       );
       return {
         subject: subName,
         attendancePercentage: subjectAttendancePercentage,
-        totalClasses: sessions,
-        attendedClasses: present,
+        totalClasses: ses,
+        attendedClasses: persent,
       };
     }
   );
@@ -107,14 +114,15 @@ const StudentAttendance = () => {
               </TableRow>
             </TableHead>
             {Object.entries(attendanceBySubject).map(
-              ([subName, { present, allData, subId, sessions }], index) => {
+              ([subName, { persent, allData, subId, sessions }], index) => {
+                const ses = sessions.length;
                 const subjectAttendancePercentage =
-                  calculateSubjectAttendancePercentage(present, sessions);
+                  calculateSubjectAttendancePercentage(persent, ses);
                 return (
                   <TableBody key={index}>
                     <StyledTableRow>
                       <StyledTableCell>{subName}</StyledTableCell>
-                      <StyledTableCell>{present}</StyledTableCell>
+                      <StyledTableCell>{persent}</StyledTableCell>
                       <StyledTableCell>{sessions}</StyledTableCell>
                       <StyledTableCell>
                         {subjectAttendancePercentage}%
@@ -204,10 +212,24 @@ const StudentAttendance = () => {
   const renderChartSection = () => {
     return (
       <>
-        <Typography variant="h4" align="center" gutterBottom>
+        <Typography
+          variant="h5"
+          sx={{ fontWeight: "bold" }}
+          align="center"
+          gutterBottom
+        >
           Attendance Chart
         </Typography>
-        <CustomBarChart charData={subjectData} dataKey="attendancePercentage" />
+        {isDataLoaded ? (
+          <CustomBarChart
+            chartData={subjectData}
+            dataKey="attendancePercentage"
+          />
+        ) : (
+          <Typography variant="body1" align="center">
+            Loading attendance data...
+          </Typography>
+        )}
       </>
     );
   };

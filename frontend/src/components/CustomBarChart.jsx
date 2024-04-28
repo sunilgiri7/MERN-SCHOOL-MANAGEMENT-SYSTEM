@@ -55,11 +55,13 @@ const TooltipMain = styled.h2`
 `;
 
 const CustomBarChart = ({ chartData, dataKey }) => {
-  const subjects = chartData.map((data) => data.subjects);
+  console.log(chartData);
+  console.log(dataKey);
+  const subjects = chartData.map((data) => data.subject);
   const distinctColor = generateDistinctColors(subjects.length);
 
   return (
-    <BarChart width={500} height={500} data={chartData}>
+    <BarChart width={500} height={450} data={chartData}>
       <XAxis
         dataKey={dataKey === "marksObtained" ? "subName.subName" : "subject"}
       />
