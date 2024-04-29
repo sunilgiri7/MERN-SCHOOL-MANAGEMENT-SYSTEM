@@ -12,12 +12,10 @@ import {
   getSubDetailsSuccess,
 } from "./classSlice";
 
-export const getAllclasses = (id, address) => async (dispatch) => {
+export const getAllclasses = (id) => async (dispatch) => {
   dispatch(getRequest);
   try {
-    const result = await axios.get(
-      `http://localhost:3000/${address}List/${id}`
-    );
+    const result = await axios.get(`http://localhost:3000/getclasslist/${id}`);
     if (result.data.message) {
       dispatch(getFailedTwo(result.data.message));
     } else {

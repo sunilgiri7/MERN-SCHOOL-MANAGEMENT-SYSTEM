@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import {
   Box,
   CssBaseline,
@@ -18,6 +18,8 @@ import { AppBar, Drawer } from "../../components/styles";
 import Logout from "../auth/Logout";
 import Sidebar from "./AdminSidebar";
 import AdminProfile from "./AdminProfile";
+import AdminHomepage from "./AdminHomepage";
+import ShowClasses from "./classRelated/ShowClasses";
 // import SideBar from "../components/SideBar"; // Import your SideBar component
 // import AccountMenu from "../components/AccountMenu"; // Import your AccountMenu component
 
@@ -77,6 +79,9 @@ const AdminDashboard = () => {
         <Box component="main" sx={styles.boxStyled}>
           <Toolbar />
           <Routes>
+            <Route path="/" element={<AdminHomepage />} />
+            <Route path="*" element={<Navigate to="/" />} />
+            <Route path="/Admin/classes" element={<ShowClasses />} />
             <Route path="Admin/profile" element={<AdminProfile />} />
             <Route path="/logout" element={<Logout />} />
             {/* Add more routes for other pages */}

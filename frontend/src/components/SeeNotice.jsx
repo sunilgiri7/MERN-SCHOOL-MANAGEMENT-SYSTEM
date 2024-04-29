@@ -12,7 +12,7 @@ const SeeNotice = () => {
   );
 
   useEffect(() => {
-    if (currentRole === "Admin") {
+    if (currentRole === "admin") {
       dispatch(getAllNotices(currentUser._id, "notice"));
     } else {
       dispatch(getAllNotices(currentUser.school, "notice"));
@@ -28,7 +28,7 @@ const SeeNotice = () => {
   ];
 
   const noticeRows = noticesList.map((notice) => {
-    const date = new Date(notice.data);
+    const date = new Date(notice.date);
     const dateString =
       date.toString() !== "Invalid Date"
         ? date.toISOString().substring(0, 10)

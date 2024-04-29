@@ -7,10 +7,10 @@ import {
   stuffDone,
 } from "./studentSlice";
 
-export const getAllStudent = (address, id) => async (dispatch) => {
+export const getAllStudent = (id) => async (dispatch) => {
   dispatch(getRequest());
   try {
-    const result = await axios.get(`http://localhost:3000/get${address}/${id}`);
+    const result = await axios.get(`http://localhost:3000/getStudent/${id}`);
     // console.log(result);
     if (result.data.message) {
       dispatch(getFailed(result.data.message));

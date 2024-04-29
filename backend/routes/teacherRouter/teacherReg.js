@@ -17,7 +17,7 @@ const {
 
 router.post("/teacherReg", teacherReg);
 router.post("/teacherlogin", TeacherLogin);
-router.post("/getteachers/:id", getTeachers);
+router.get("/getteachers/:id", getTeachers);
 router.post("/getteachersdetail/:id", getTeacherDetails);
 router.post("/updateTeacherSubs", updateTeacherSub);
 router.post("/deleteTeacher/:id", deleteTeacher);
