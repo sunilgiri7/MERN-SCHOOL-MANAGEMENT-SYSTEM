@@ -15,10 +15,14 @@ import { getUserDetails } from "../../redux/userRelated/UserHandle";
 
 const StudentProfile = () => {
   const dispatch = useDispatch();
-  const { currentUser, response, error } = useSelector((state) => state.user);
+  const { userDetails, currentUser, response, error } = useSelector(
+    (state) => state.user
+  );
+  const cls = userDetails.className;
+  const skool = userDetails.school;
 
-  const className = currentUser.className;
-  const studentSchool = currentUser.school;
+  const className = cls.className;
+  const studentSchool = skool.schoolName;
 
   useEffect(() => {
     dispatch(getUserDetails(currentUser._id, "getStudentDetails"));
@@ -40,10 +44,10 @@ const StudentProfile = () => {
         </ProfileHeader>
         <ProfileDetails>
           <Typography variant="subtitle1" component="p">
-            <strong>Class:</strong> {className.className}
+            <strong>Class:</strong> {className}
           </Typography>
           <Typography variant="subtitle1" component="p">
-            <strong>School:</strong> {studentSchool.school}
+            <strong>School:</strong> {studentSchool}
           </Typography>
         </ProfileDetails>
       </StyledPaper>

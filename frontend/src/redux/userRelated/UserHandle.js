@@ -62,8 +62,6 @@ export const logoutUser = () => (dispatch) => {
 export const getUserDetails = (id, address) => async (dispatch) => {
   dispatch(getRequest());
   try {
-    console.log(id);
-    console.log(address);
     const result = await axios.get(`http://localhost:3000/${address}/${id}`);
     if (result.data) {
       dispatch(doneSuccess(result.data));
@@ -114,13 +112,20 @@ export const updateUser = (fields, id, address) => async (dispatch) => {
 export const addStuffs = (fields, address) => async (dispatch) => {
   dispatch(authRequest());
   try {
-    const result = await axios.post(`/${address}Create`, fields, {
-      headers: { "Content-Type": "application/json" },
-    });
-    if (result.data.message) {
-      dispatch(authFailed(result.data.message));
-    } else {
+    console.log(fields);
+    console.log(address);
+    const result = await axios.post(
+      `http://localhost:3000/create${address}`,
+      fields,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    console.log("ndjqwnjlf");
+    if (result.data) {
       dispatch(stuffsAdded(result.data));
+    } else {
+      dispatch(authFailed(result.data.message));
     }
   } catch (error) {
     dispatch(authError(error));

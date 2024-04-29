@@ -3,7 +3,6 @@ const Student = require("../../models/studentSchema");
 const Subject = require("../../models/subjectSchema");
 
 const studentLogin = async (req, res) => {
-  console.log("defjwbkfe");
   try {
     console.log(req.body.rollNum);
     console.log(req.body.name);

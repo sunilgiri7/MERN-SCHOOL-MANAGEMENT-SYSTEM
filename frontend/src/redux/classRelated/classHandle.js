@@ -31,7 +31,9 @@ export const getAllclasses = (id, address) => async (dispatch) => {
 export const getClassStudent = (id) => async (dispatch) => {
   dispatch(getRequest());
   try {
-    const result = await axios.get(`http://localhost:3000/class/Student/${id}`);
+    const result = await axios.get(
+      `http://localhost:3000/getclassstudent/${id}`
+    );
     if (result.data.message) {
       dispatch(getFailedTwo(result.data.message));
     } else {

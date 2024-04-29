@@ -41,7 +41,7 @@ const StudentAttendance = () => {
   const { userDetails, currentUser, loading, response, error } = useSelector(
     (state) => state.user
   );
-  //   console.log(currentUser);
+  // console.log(userDetails);
   //   console.log(currentUser._id);
 
   const handleOpen = (subId) => {

@@ -21,6 +21,7 @@ import StudentProfile from "./StudentProfile";
 import StudentHomepage from "./StudentHomepage";
 import StudentSubject from "./StudentSubject";
 import StudentAttendance from "./StudentAttendance";
+import StudentComplain from "./StudentComplain";
 
 const StudentDashboard = () => {
   const [open, setOpen] = useState(false);
@@ -79,11 +80,12 @@ const StudentDashboard = () => {
           <Toolbar />
           <Routes>
             <Route path="/" element={<StudentHomepage />} />
-            <Route path="Student/profile" element={<StudentProfile />} />
+            <Route path="/Student/profile" element={<StudentProfile />} />
             <Route path="/Student/profile" element={<StudentProfile />} />
 
             <Route path="/Student/subjects" element={<StudentSubject />} />
-            <Route path="Student/attendance" element={<StudentAttendance />} />
+            <Route path="/Student/attendance" element={<StudentAttendance />} />
+            <Route path="/Student/complain" element={<StudentComplain />} />
             <Route path="/logout" element={<Logout />} />
 
             {/* Add more routes for other pages */}

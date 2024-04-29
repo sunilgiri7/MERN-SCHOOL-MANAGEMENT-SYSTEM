@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const Student = require("../../models/studentSchema");
+const sclass = require("../../models/sclassSchema");
 
 const getStudentDetail = async (req, res) => {
   try {
