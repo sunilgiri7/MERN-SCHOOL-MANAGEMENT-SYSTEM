@@ -6,22 +6,18 @@ import {
   getSubjectList,
 } from "../../redux/classRelated/classHandle";
 
-import Typography from "@material-ui/core/Typography";
-import Table from "@material-ui/core/Table";
-import TableHead from "@material-ui/core/TableHead";
-import TableBody from "@material-ui/core/TableBody";
+import Typography from '@mui/material/Typography';
+import Table from '@mui/material/Table';
+import TableHead from '@mui/material/TableHead';
+import TableBody from '@mui/material/TableBody';
 import {
   StyledTableCell,
   StyledTableRow,
   StyledTableContainer,
 } from "../../components/styles";
 import CustomBarChart from "../../components/CustomBarChart";
-import {
-  Container,
-  Paper,
-  BottomNavigation,
-  BottomNavigationAction,
-} from "@material-ui/core";
+import { Container, Paper } from "@mui/material";
+import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import TableChartIcon from "@mui/icons-material/TableChart";
 import TableChartOutlinedIcon from "@mui/icons-material/TableChartOutlined";
 import InsertChartIcon from "@mui/icons-material/InsertChart";
